@@ -51,4 +51,11 @@ then
 fi
 
 declare -a args="($(cat $SNAP_DATA/args/$app))"
+if [ -e "${SNAP_DATA}/args/${app}-env" ]
+then
+  set -a
+  . "${SNAP_DATA}/args/${app}-env"
+  set +a
+fi
+
 exec "$SNAP/$app" "${args[@]}"
